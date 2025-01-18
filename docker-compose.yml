@@ -1,0 +1,11 @@
+services:
+  safeworkhat:
+    build: .
+    container_name: safeworkhat_app
+    volumes:
+      - ./src:/app/src
+      - ./static:/app/static
+      - ./templates:/app/templates
+    ports:
+      - "5001:5000"
+    command: python /app/src/test.py
