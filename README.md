@@ -1,6 +1,8 @@
 # SafeWorkHat
 2024 Smarthon SafeWorkHat
 
+cd /Users/apple/Desktop/Python/Github/SafeWorkHat
+
 ### 1. 커밋(Commit)
 커밋은 로컬 저장소에 변경 사항을 저장하는 과정입니다.
 1. 변경 파일 확인
@@ -10,8 +12,8 @@
 git add <파일 이름>      # 특정 파일 추가
 git add .                # 모든 변경 파일 추가
 4. 커밋 저장
-- 변경 사항을 로컬 저장소에 저장:
-git commit -m "업데이트"
+- 변경 사항을 로컬 저장소에 저장: git commit -m "업데이트"
+- git add . 
 
 ### 2. 푸시(Push)
 로컬 저장소의 커밋을 원격 저장소(GitHub 등)에 업로드합니다.
