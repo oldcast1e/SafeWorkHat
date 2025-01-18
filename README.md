@@ -15,6 +15,11 @@ git add .                # 모든 변경 파일 추가
 - 변경 사항을 로컬 저장소에 저장: git commit -m "업데이트"
 - git add . 
 
+```
+git commit -m "업데이트"
+git add . 
+```
+
 ### 2. 푸시(Push)
 로컬 저장소의 커밋을 원격 저장소(GitHub 등)에 업로드합니다.
 
@@ -23,6 +28,9 @@ git add .                # 모든 변경 파일 추가
 - 예시: 기본 브랜치인 main에 푸시하려면: git push origin main
 - 원격 저장소 로그인 필요 시 GitHub 계정의 사용자명과 토큰(패스워드)을 입력해야 합니다. 토큰은 GitHub에서 생성하여 사용합니다.
 
+```
+git push origin main
+```
 
 
 

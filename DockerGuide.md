@@ -107,3 +107,101 @@ git clone https://github.com/SafeWorkHat/SafeWorkHat.git
 cd SafeWorkHat
 docker-compose up
 ```
+
+# 4. 동일한 작업 환경에서 작업 단계
+
+## 1. GitHub에서 프로젝트 클론
+- 팀원들은 GitHub 리포지토리에서 프로젝트를 클론합니다.
+- 이때 해당 작업 공간을 저장할 위치보다 한 단계 상위 폴더에서 진행해야한다!
+```
+git clone https://github.com/SafeWorkHat/SafeWorkHat.git
+cd SafeWorkHat
+```
+
+
+- 클론한 디렉토리 구조는 다음과 같아야 합니다:
+```
+SafeWorkHat/
+├── Dockerfile
+├── docker-compose.yml  # (옵션: 있는 경우)
+├── src/
+│   ├── test.py
+├── asset/
+│   ├── 자동차1.jpeg
+├── static/
+├── templates/
+```
+
+## 2. 도커 설치
+- Docker Desktop을 설치합니다. Mac (Apple Silicon) 용 버전을 선택해야 합니다.
+- 혹은 윈도우 버전을 사용해도 무방하다.
+- 설치 후, 도커가 정상적으로 작동하는지 확인합니다:
+```
+docker --version
+```
+- 출력 결과가 정상적이라면 도커가 제대로 설치된 것입니다.
+
+## 3. Docker 이미지 빌드
+- 프로젝트 디렉토리 (SafeWorkHat/)로 이동한 뒤, 도커 이미지를 빌드합니다:
+```
+docker build -t safeworkhat .
+```
+- safeworkhat: 이미지를 식별하기 위한 이름입니다.
+- 빌드 과정이 완료되면, 도커 이미지 목록에서 확인할 수 있습니다:
+
+```
+docker images
+```
+- 출력 결과에 safeworkhat 이미지가 표시됩니다.
+
+## 4. 도커 컨테이너 실행
+### 4.1. 단일 명령어로 실행
+- 도커 이미지를 실행하여 컨테이너를 생성합니다:
+```
+docker run --rm -it -v $(pwd)/src:/app/src -v $(pwd)/asset:/app/asset safeworkhat
+```
+
+--rm: 컨테이너 종료 시 삭제합니다.
+-it: 대화형 터미널을 제공합니다.
+-v: 로컬 디렉토리를 컨테이너 내부에 마운트합니다.
+
+$(pwd)/src:/app/src: 로컬 src 디렉토리를 컨테이너의 /app/src로 연결합니다.
+$(pwd)/asset:/app/asset: 로컬 asset 디렉토리를 컨테이너의 /app/asset로 연결합니다.
+
+### 4.2. Docker Compose로 실행 (옵션)
+- docker-compose.yml 파일이 포함된 경우, 도커 컴포즈를 사용하여 실행합니다:
+```
+docker-compose up
+```
+- 이 방법은 설정 파일에서 환경 및 옵션을 정의하고, 단순히 명령 한 줄로 실행합니다.
+
+## 5. YOLOv8 테스트
+- 컨테이너 실행 중 YOLOv8 테스트가 자동으로 실행되도록 설정되어 있으므로 결과가 출력됩니다. 
+- src/test.py 파일에서 모델이 로드되고, asset/자동차1.jpeg 이미지에서 객체 탐지를 수행합니다.
+
+## 6. 작업 환경 유지 및 업데이트
+### 6.1 새로 업데이트된 Dockerfile 적용
+- 만약 도커 파일이나 프로젝트 코드가 업데이트되었다면, 팀원들은 GitHub에서 최신 업데이트를 가져옵니다:
+```
+git pull origin main
+```
+
+- 새로 이미지를 빌드합니다:
+```
+docker-compose build
+```
+
+- 또는, Dockerfile을 기준으로:
+```
+docker build -t safeworkhat .
+```
+
+- 컨테이너를 다시 실행합니다:
+
+```
+docker-compose up
+```
+- 또는:
+```
+docker run --rm -it -v $(pwd)/src:/app/src -v $(pwd)/asset:/app/asset safeworkhat
+```
