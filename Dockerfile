@@ -1,24 +1,24 @@
-# 베이스 이미지로 Python 3.8 사용
-FROM python:3.8-slim
+# 베이스 이미지 설정 (Python 3.11 Slim 버전)
+FROM python:3.11-slim
 
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 필요한 시스템 라이브러리 설치
+# 시스템 종속성 설치
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
-    libglib2.0-0
+    libglib2.0-0 \
+    && apt-get clean
 
 # Python 패키지 관리 도구 업데이트
-RUN pip install --upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
 
 # YOLOv8 및 기타 종속성 설치
-RUN pip install ultralytics opencv-python-headless flask
+RUN pip install --no-cache-dir ultralytics opencv-python-headless
 
-# 소스 코드 복사
+# 로컬 파일 복사
 COPY src/ /app/src
-COPY static/ /app/static
-COPY templates/ /app/templates
+COPY asset/ /app/asset
 
 # 작업 디렉토리로 이동
 WORKDIR /app/src
