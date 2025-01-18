@@ -2,19 +2,21 @@
 ### 1.1 프로젝트 구조
 - 프로젝트 디렉토리가 다음과 같아야 한다:
 
-SafeWorkHat/   
-├── asset/
-│   ├── 자동차1.jpeg
-├── src/
-│   ├── test.py
-├── static/
-├── templates/
-└── Dockerfile
+SafeWorkHat/      
+├── asset/   
+│   ├── 자동차1.jpeg   
+├── src/   
+│   ├── test.py   
+├── static/   
+├── templates/   
+└── Dockerfile   
 
-1.2 Dockerfile 내용
+### 1.2 Dockerfile 내용
 Dockerfile에는 YOLOv8 및 필요한 라이브러리를 설치하는 명령을 포함한다:
 
-'''
+
+# 베이스 이미지 설정 (Python 3.11 Slim 버전)
+```python
 # 베이스 이미지 설정 (Python 3.11 Slim 버전)
 FROM python:3.11-slim
 
@@ -42,8 +44,7 @@ WORKDIR /app/src
 
 # 기본 실행 명령어 설정
 CMD ["python", "test.py"]
-
-'''
+```
 
 # 2. Docker Compose 설정 (옵션)
 ### 2.1 docker-compose.yml 생성
@@ -52,7 +53,7 @@ CMD ["python", "test.py"]
 ### 2.2 docker-compose.yml 내용
 YOLOv8를 실행할 환경을 정의:
 
-'''
+```python
 version: "3.9"
 
 services:
@@ -65,7 +66,7 @@ services:
     ports:
       - "5000:5000"
     command: python /app/src/test.py
-'''
+```
 
 # 3. 도커 빌드 및 실행
 ### 3.1 이미지 빌드
@@ -79,18 +80,18 @@ docker-compose.yml을 사용하여 실행: docker-compose up
 
 # 4. 팀원들과 환경 공유
 - 프로젝트 푸시 프로젝트를 팀의 GitHub 리포지토리에 푸시:
-'''
+```
 git init
 git add .
 git commit -m "Initial commit"
 git remote add origin https://github.com/SafeWorkHat/SafeWorkHat.git
 git push -u origin main
-'''
+```
 
 - 팀원 설정 팀원들은 프로젝트를 클론한 후 다음 명령어를 실행하여 동일한 환경을 구축:
 
-'''
+```
 git clone https://github.com/SafeWorkHat/SafeWorkHat.git
 cd SafeWorkHat
 docker-compose up
-'''
+```
