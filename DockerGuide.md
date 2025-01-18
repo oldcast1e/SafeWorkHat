@@ -2,6 +2,7 @@
 ### 1.1 프로젝트 구조
 - 프로젝트 디렉토리가 다음과 같아야 한다:
 
+```
 SafeWorkHat/      
 ├── asset/   
 │   ├── 자동차1.jpeg   
@@ -10,6 +11,7 @@ SafeWorkHat/
 ├── static/   
 ├── templates/   
 └── Dockerfile   
+```
 
 ### 1.2 Dockerfile 내용
 Dockerfile에는 YOLOv8 및 필요한 라이브러리를 설치하는 명령을 포함한다:
